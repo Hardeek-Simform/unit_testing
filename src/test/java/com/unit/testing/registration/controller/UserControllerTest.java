@@ -87,6 +87,7 @@ class UserControllerTest {
     }
 
     @Test
+    @DisplayName("pass case: delete user")
     void userController_deleteUser_serviceDeleteUserById_pass() throws Exception {
         doAnswer(Answers.CALLS_REAL_METHODS).when(userService).deleteUserById(1);
         mockMvc.perform(delete("/v1/user/1")).andDo(print()).andExpect(status().isOk());

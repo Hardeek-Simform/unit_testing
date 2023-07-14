@@ -88,6 +88,7 @@ class VendorControllerTest {
     }
 
     @Test
+    @DisplayName("pass case: delete vendor")
     void vendorController_deleteVendor_serviceDeleteVendorById_pass() throws Exception {
         doAnswer(Answers.CALLS_REAL_METHODS).when(vendorService).deleteVendorById(1);
         mockMvc.perform(delete("/v1/vendor/1")).andDo(print()).andExpect(status().isOk());

@@ -44,7 +44,7 @@ class UserServiceImplTest {
     }
 
     @Test
-    @DisplayName("case:GetAllUsers")
+    @DisplayName("case:Get All Users")
     void service_GetAllUsers_RepoFindAllMethod() {
         mock(User.class);
         mock(UserRepository.class);
