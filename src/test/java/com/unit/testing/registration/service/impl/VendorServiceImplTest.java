@@ -48,7 +48,7 @@ class VendorServiceImplTest {
 
     @Test
     @DisplayName("case : Get all vendors list")
-    void service_GetAllUsers_RepoFindAllMethod() {
+    void testGetAllVendor() {
         mock(User.class);
         mock(UserRepository.class);
         when(vendorRepository.findAll()).thenReturn(new ArrayList<>(Collections.singleton(vendor)));
@@ -57,7 +57,7 @@ class VendorServiceImplTest {
 
     @Test
     @DisplayName("case : adding vendor")
-    void service_AddUser_RepoSaveMethod() {
+    void testAddVendor() {
         mock(User.class);
         mock(UserRepository.class);
         when(vendorRepository.save(vendor)).thenReturn(vendor);
@@ -66,9 +66,11 @@ class VendorServiceImplTest {
 
     @Test
     @DisplayName("case: deleting vendor by id")
-    void service_DeleteUserById_RepoDeleteByIdMethod() {
+    void testDeleteVendorById() {
         mock(User.class);
         mock(UserRepository.class, CALLS_REAL_METHODS);
-        doAnswer(CALLS_REAL_METHODS).when(vendorRepository).deleteById(any());
+        doAnswer(CALLS_REAL_METHODS).when(vendorRepository).deleteById(1);
+        vendorService.deleteVendorById(1);
+        verify(vendorRepository).deleteById(1);
     }
 }

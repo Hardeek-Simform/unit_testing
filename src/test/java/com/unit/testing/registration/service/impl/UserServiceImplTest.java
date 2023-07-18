@@ -45,7 +45,7 @@ class UserServiceImplTest {
 
     @Test
     @DisplayName("case:Get All Users")
-    void service_GetAllUsers_RepoFindAllMethod() {
+    void testGetAllUsers() {
         mock(User.class);
         mock(UserRepository.class);
         when(userRepository.findAll()).thenReturn(
@@ -56,18 +56,21 @@ class UserServiceImplTest {
 
     @Test
     @DisplayName("case : adding user")
-    void service_AddUser_RepoSaveMethod() {
+    void testAddUser() {
         mock(User.class);
         mock(UserRepository.class);
         when(userRepository.save(user)).thenReturn(user);
         assertThat(userService.addUser(user)).isEqualTo(user);
     }
 
+
     @Test
     @DisplayName("case: deleting user by id")
-    void service_DeleteUserById_RepoDeleteById() {
+    void testDeleteVendorById() {
         mock(User.class);
         mock(UserRepository.class, CALLS_REAL_METHODS);
-        doAnswer(CALLS_REAL_METHODS).when(userRepository).deleteById(any());
+        doAnswer(CALLS_REAL_METHODS).when(userRepository).deleteById(1);
+        userService.deleteUserById(1);
+        verify(userRepository).deleteById(1);
     }
 }

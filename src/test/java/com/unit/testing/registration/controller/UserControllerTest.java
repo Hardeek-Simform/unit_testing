@@ -57,14 +57,14 @@ class UserControllerTest {
 
     @Test
     @DisplayName("pass case : get all users")
-    void userController_testGetAllUsers_serviceGetAllUsersMethod_pass() throws Exception {
+    void testGetAllUsers_pass() throws Exception {
         when(userService.getAllUsers()).thenReturn(userList);
         this.mockMvc.perform(get("/v1/user")).andDo(print()).andExpect(status().isFound());
     }
 
     @Test
     @DisplayName("fail case: get all users")
-    void userController_testGetAllUsers_serviceGetAllUsersMethod_fail() throws Exception {
+    void testGetAllUsers_fail() throws Exception {
         when(userService.getAllUsers()).thenReturn(userList);
         this.mockMvc.perform(get("/v1/user/")).andDo(print()).andExpect(status().isNotFound());
     }
@@ -72,7 +72,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("pass case: save user")
-    void userController_testSaveUser_serviceAddUserMethod_pass() throws Exception {
+    void testSaveUser_pass() throws Exception {
         String jsonObj = getJsonObject(user1);
         when(userService.addUser(user1)).thenReturn(user1);
         this.mockMvc.perform(post("/v1/user").contentType(MediaType.APPLICATION_JSON).content(jsonObj)).andDo(print()).andExpect(status().isCreated());
@@ -80,7 +80,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("fail case: save user")
-    void userController_testSaveUser_serviceAddUserMethod_fail() throws Exception {
+    void testSaveUser_fail() throws Exception {
         String jsonObj = getJsonObject(user1);
         when(userService.addUser(user1)).thenReturn(null);
         this.mockMvc.perform(post("/v1/user").contentType(MediaType.APPLICATION_JSON).content(jsonObj)).andDo(print()).andExpect(status().isBadRequest());
@@ -88,7 +88,7 @@ class UserControllerTest {
 
     @Test
     @DisplayName("pass case: delete user")
-    void userController_deleteUser_serviceDeleteUserById_pass() throws Exception {
+    void testDeleteUser_pass() throws Exception {
         doAnswer(Answers.CALLS_REAL_METHODS).when(userService).deleteUserById(1);
         mockMvc.perform(delete("/v1/user/1")).andDo(print()).andExpect(status().isOk());
     }

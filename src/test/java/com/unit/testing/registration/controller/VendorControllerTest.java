@@ -58,14 +58,14 @@ class VendorControllerTest {
 
     @Test
     @DisplayName("pass case : get all vendors")
-    void vendorController_testGetAllVendors_serviceGetAllVendorsMethod_pass() throws Exception {
+    void testGetAllVendors_pass() throws Exception {
         when(vendorService.getAllVendors()).thenReturn(vendorList);
         this.mockMvc.perform(get("/v1/vendor")).andDo(print()).andExpect(status().isFound());
     }
 
     @Test
     @DisplayName("fail case: get all vendors")
-    void vendorController_testGetAllVendors_serviceGetAllVendorsMethod_fail() throws Exception {
+    void testGetAllVendors_fail() throws Exception {
         when(vendorService.getAllVendors()).thenReturn(vendorList);
         this.mockMvc.perform(get("/v1/vendor/")).andDo(print()).andExpect(status().isNotFound());
     }
@@ -73,7 +73,7 @@ class VendorControllerTest {
 
     @Test
     @DisplayName("pass case: save vendor")
-    void vendorController_testSaveVendor_serviceAddVendorMethod_pass() throws Exception {
+    void testSaveVendor_pass() throws Exception {
         String jsonObj = getJsonObject(vendor1);
         when(vendorService.addVendor(vendor1)).thenReturn(vendor1);
         this.mockMvc.perform(post("/v1/vendor").contentType(MediaType.APPLICATION_JSON).content(jsonObj)).andDo(print()).andExpect(status().isCreated());
@@ -81,7 +81,7 @@ class VendorControllerTest {
 
     @Test
     @DisplayName("fail case: save vendor")
-    void vendorController_testSaveVendor_serviceAddVendorMethod_fail() throws Exception {
+    void testSaveVendor_fail() throws Exception {
         String jsonObj = getJsonObject(vendor1);
         when(vendorService.addVendor(vendor1)).thenReturn(null);
         this.mockMvc.perform(post("/v1/vendor").contentType(MediaType.APPLICATION_JSON).content(jsonObj)).andDo(print()).andExpect(status().isBadRequest());
@@ -89,7 +89,7 @@ class VendorControllerTest {
 
     @Test
     @DisplayName("pass case: delete vendor")
-    void vendorController_deleteVendor_serviceDeleteVendorById_pass() throws Exception {
+    void testDeleteVendor_pass() throws Exception {
         doAnswer(Answers.CALLS_REAL_METHODS).when(vendorService).deleteVendorById(1);
         mockMvc.perform(delete("/v1/vendor/1")).andDo(print()).andExpect(status().isOk());
     }
